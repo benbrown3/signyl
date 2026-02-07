@@ -359,8 +359,21 @@
         @media (max-width: 900px) {
             .section-grid { grid-template-columns: 1fr; gap: 48px; }
             .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .hamburger { display: flex; }
             nav, .hero, section, .platforms, .cta { padding-left: 24px; padding-right: 24px; }
         }
+        
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 200; }
+        .hamburger span { width: 24px; height: 2px; background: var(--ink); transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 150; padding: 100px 24px 40px; flex-direction: column; gap: 8px; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { font-size: 1.5rem; font-family: 'Fraunces', serif; color: var(--ink); text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border); }
+        .mobile-menu a:hover { color: var(--accent); }
+        .mobile-menu .mobile-cta { margin-top: 24px; background: var(--accent); color: white; text-align: center; padding: 16px; border-radius: 100px; border: none; font-weight: 600; }
 
         .fade-up {
             opacity: 0;
@@ -388,8 +401,17 @@
                 <li><a href="/">Approach</a></li>
             </ul>
             <a href="/contact" class="nav-cta">Get in touch</a>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         </div>
     </nav>
+    <div class="mobile-menu">
+        <a href="/">About</a>
+        <a href="/paid-media">Paid Media</a>
+        <a href="/seo">SEO</a>
+        <a href="/geo">GEO</a>
+        <a href="/cro">CRO</a>
+        <a href="/contact" class="mobile-cta">Get in touch</a>
+    </div>
 
     <section class="hero">
         <div class="hero-label fade-up">Generative Engine Optimization</div>
@@ -540,6 +562,7 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        function toggleMenu() { document.querySelector('.hamburger').classList.toggle('active'); document.querySelector('.mobile-menu').classList.toggle('active'); document.body.style.overflow = document.querySelector('.mobile-menu').classList.contains('active') ? 'hidden' : ''; }
     </script>
 </body>
 </html>
