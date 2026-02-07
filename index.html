@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signyl — Growth Through Signal</title>
+    <meta name="description" content="ML-powered marketing agency. Find the signal, cut the noise.">
+    <meta property="og:title" content="Signyl — Growth Through Signal">
+    <meta property="og:description" content="ML-powered marketing agency. Find the signal, cut the noise.">
+    <meta property="og:image" content="https://signyl.agency/og-image.png">
+    <meta property="og:url" content="https://signyl.agency">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Signyl — Growth Through Signal">
+    <meta name="twitter:description" content="ML-powered marketing agency. Find the signal, cut the noise.">
+    <meta name="twitter:image" content="https://signyl.agency/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -593,18 +604,6 @@
             .combo-grid { grid-template-columns: 1fr; gap: 24px; }
             .combo-plus { display: none; }
         }
-        @media (max-width: 800px) {
-            nav { padding: 20px 24px; }
-            .nav-links { display: none; }
-            .nav-cta { display: none; }
-            .hamburger { display: flex; }
-            .hero, section { padding-left: 24px; padding-right: 24px; }
-            .about-grid { grid-template-columns: 1fr; gap: 48px; }
-            .approach-steps { grid-template-columns: 1fr; }
-            .cred-bar { padding: 24px; }
-            .cred-inner { gap: 32px; }
-        }
-        
         /* Mobile Menu */
         .hamburger {
             display: none;
@@ -657,6 +656,18 @@
             border-radius: 100px;
             border: none;
             font-weight: 600;
+        }
+
+        @media (max-width: 800px) {
+            nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            .hero, section { padding-left: 24px; padding-right: 24px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .approach-steps { grid-template-columns: 1fr; }
+            .cred-bar { padding: 24px; }
+            .cred-inner { gap: 32px; }
         }
         @media (max-width: 600px) {
             .hero { padding-top: 120px; }
