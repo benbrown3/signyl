@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signyl Logo Concepts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0a0a0a;
+            color: #fafafa;
+            padding: 60px;
+            min-height: 100vh;
+        }
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 60px;
+            font-size: 1.125rem;
+        }
+        .concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 48px;
+        }
+        .concept {
+            background: #111;
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid #222;
+        }
+        .concept h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #E85A2A;
+            font-weight: 400;
+        }
+        .concept p {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            margin-bottom: 24px;
+        }
+        .wordmark {
+            text-align: center;
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            color: #fafafa;
+            margin-top: 16px;
+            letter-spacing: -0.02em;
+        }
+        .variants {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #222;
+        }
+        .variant {
+            text-align: center;
+        }
+        .variant span {
+            display: block;
+            font-size: 0.75rem;
+            color: #444;
+            margin-top: 8px;
+        }
+
+        /* Concept 1: Signal Emergence - dots forming pattern */
+        .signal-emergence {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .dot-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+            width: 120px;
+            height: 120px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #222;
+            transition: all 0.3s;
+        }
+        .dot.signal {
+            background: #E85A2A;
+            box-shadow: 0 0 12px rgba(232, 90, 42, 0.5);
+        }
+
+        /* Concept 2: Frequency Peak */
+        .frequency-peak svg {
+            width: 140px;
+            height: 140px;
+        }
+
+        /* Concept 3: Negative Space S */
+        .negative-s svg {
+            width: 100px;
+            height: 120px;
+        }
+
+        /* Concept 4: Signal Waves Converging */
+        .converging-waves svg {
+            width: 140px;
+            height: 100px;
+        }
+
+        /* Concept 5: The Isolation Mark */
+        .isolation-mark {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .noise-field {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            gap: 2px;
+        }
+        .noise-dot {
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            border-radius: 1px;
+        }
+        .signal-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: #E85A2A;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 0 8px rgba(232, 90, 42, 0.2),
+                0 0 0 16px rgba(232, 90, 42, 0.1),
+                0 0 40px rgba(232, 90, 42, 0.4);
+        }
+
+        /* Concept 6: Abstract S from signal path */
+        .signal-path svg {
+            width: 80px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Signyl Logo Concepts</h1>
+    <p class="subtitle">Six unique directions. All original. Pick a direction to refine.</p>
+
+    <div class="concepts">
+        <!-- Concept 1: Signal Emergence -->
+        <div class="concept">
+            <h2>01 — Signal Emergence</h2>
+            <p>A grid of noise where the signal (S shape) emerges. Represents finding pattern in chaos. Animated potential.</p>
+            <div class="logo-container">
+                <div class="signal-emergence">
+                    <div class="dot-grid">
+                        <!-- Row 1 -->
+                        <div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div>
+                        <!-- Row 2 -->
+                        <div class="dot"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot"></div>
+                        <!-- Row 3 -->
+                        <div class="dot"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                        <!-- Row 4 -->
+                        <div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                        <!-- Row 5 -->
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div>
+                        <!-- Row 6 -->
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot"></div>
+                        <!-- Row 7 -->
+                        <div class="dot"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot"></div>
+                        <!-- Row 8 -->
+                        <div class="dot"></div><div class="dot"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot signal"></div><div class="dot"></div><div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+
+        <!-- Concept 2: Frequency Peak -->
+        <div class="concept">
+            <h2>02 — Frequency Peak</h2>
+            <p>A single, sharp peak emerging from flat noise. The moment of signal discovery. Minimal, bold, memorable.</p>
+            <div class="logo-container">
+                <div class="frequency-peak">
+                    <svg viewBox="0 0 140 140" fill="none">
+                        <!-- Baseline noise -->
+                        <path d="M10 100 Q20 98 30 100 Q40 102 50 100 Q55 99 60 100" stroke="#333" stroke-width="2" fill="none"/>
+                        <path d="M80 100 Q90 102 100 100 Q110 98 120 100 Q125 101 130 100" stroke="#333" stroke-width="2" fill="none"/>
+                        <!-- The signal peak -->
+                        <path d="M55 100 L60 100 L65 85 L70 40 L75 85 L80 100 L85 100" stroke="#E85A2A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Glow effect -->
+                        <circle cx="70" cy="40" r="6" fill="#E85A2A" opacity="0.3"/>
+                        <circle cx="70" cy="40" r="3" fill="#E85A2A"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+
+        <!-- Concept 3: Converging Waves -->
+        <div class="concept">
+            <h2>03 — Convergence</h2>
+            <p>Multiple chaotic waves converging into a single, clear signal. Represents isolating signal from noise.</p>
+            <div class="logo-container">
+                <div class="converging-waves">
+                    <svg viewBox="0 0 160 100" fill="none">
+                        <!-- Chaotic input waves -->
+                        <path d="M10 20 Q25 15 35 25 Q45 35 55 20" stroke="#333" stroke-width="1.5" fill="none"/>
+                        <path d="M10 40 Q20 50 35 35 Q50 20 55 40" stroke="#333" stroke-width="1.5" fill="none"/>
+                        <path d="M10 60 Q30 55 40 65 Q50 75 55 55" stroke="#333" stroke-width="1.5" fill="none"/>
+                        <path d="M10 80 Q25 70 35 80 Q45 90 55 75" stroke="#333" stroke-width="1.5" fill="none"/>
+                        
+                        <!-- Convergence point -->
+                        <circle cx="70" cy="50" r="12" fill="#E85A2A" opacity="0.15"/>
+                        <circle cx="70" cy="50" r="6" fill="#E85A2A"/>
+                        
+                        <!-- Clean output signal -->
+                        <path d="M85 50 L150 50" stroke="#E85A2A" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M140 45 L150 50 L140 55" stroke="#E85A2A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+
+        <!-- Concept 4: The Isolation Mark -->
+        <div class="concept">
+            <h2>04 — Isolation</h2>
+            <p>A field of noise with a perfect circle of clarity at center. The signal, isolated. Simple but striking.</p>
+            <div class="logo-container">
+                <div class="isolation-mark">
+                    <div class="noise-field">
+                        <script>
+                            // Generate noise dots
+                            for(let i = 0; i < 144; i++) {
+                                document.write('<div class="noise-dot" style="opacity:' + (Math.random() * 0.5 + 0.1) + '"></div>');
+                            }
+                        </script>
+                    </div>
+                    <div class="signal-core"></div>
+                </div>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+
+        <!-- Concept 5: Signal Path S -->
+        <div class="concept">
+            <h2>05 — Signal Path</h2>
+            <p>An S formed by a continuous signal path with a peak. Combines letterform with the signal metaphor.</p>
+            <div class="logo-container">
+                <div class="signal-path">
+                    <svg viewBox="0 0 80 120" fill="none">
+                        <path d="M60 15 
+                                 Q60 5 50 5 
+                                 L30 5 
+                                 Q15 5 15 20 
+                                 Q15 35 30 40
+                                 L40 45
+                                 L45 30
+                                 L50 45
+                                 L55 40
+                                 Q70 35 70 50
+                                 Q70 65 55 70
+                                 L50 70
+                                 Q35 70 35 85
+                                 Q35 100 50 100
+                                 L55 100
+                                 Q70 100 70 115
+                                 Q70 115 60 115" 
+                              stroke="#E85A2A" 
+                              stroke-width="4" 
+                              fill="none" 
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+
+        <!-- Concept 6: Minimal Waveform Mark -->
+        <div class="concept">
+            <h2>06 — The Mark</h2>
+            <p>Ultra-minimal. A single waveform that suggests both S and signal. Works at any size. Timeless.</p>
+            <div class="logo-container">
+                <svg viewBox="0 0 100 100" width="100" height="100" fill="none">
+                    <path d="M20 70 
+                             Q20 50 35 50 
+                             Q50 50 50 35
+                             Q50 20 65 20
+                             Q80 20 80 40
+                             Q80 55 65 55
+                             Q50 55 50 70
+                             Q50 85 35 85
+                             Q20 85 20 70" 
+                          stroke="#E85A2A" 
+                          stroke-width="6" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="wordmark">signyl</div>
+        </div>
+    </div>
+
+    <script>
+        // Animate the noise field
+        const noiseDots = document.querySelectorAll('.noise-dot');
+        setInterval(() => {
+            noiseDots.forEach(dot => {
+                dot.style.opacity = Math.random() * 0.4 + 0.1;
+            });
+        }, 200);
+    </script>
+</body>
+</html>
