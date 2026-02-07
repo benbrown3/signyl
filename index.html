@@ -637,6 +637,18 @@
             gap: 8px;
         }
         .mobile-menu.active { display: flex; }
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: var(--ink);
+            cursor: pointer;
+            line-height: 1;
+            padding: 8px;
+        }
         .mobile-menu a {
             font-size: 1.5rem;
             font-family: 'Fraunces', serif;
@@ -727,6 +739,7 @@
     </nav>
     
     <div class="mobile-menu">
+        <button class="mobile-close" onclick="toggleMenu()">&times;</button>
         <a href="/">About</a>
         <a href="/paid-media">Paid Media</a>
         <a href="/seo">SEO</a>
