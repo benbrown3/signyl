@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO — Signyl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #FAF9F7;
+            --surface: #FFFFFF;
+            --ink: #1a1a1a;
+            --ink-2: #4a4a4a;
+            --ink-3: #8a8a8a;
+            --accent: #E85A2A;
+            --accent-hover: #D14E22;
+            --accent-light: rgba(232,90,42,0.08);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            background: rgba(250,249,247,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--ink-2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-cta:hover { background: var(--accent-hover); transform: scale(1.02); }
+
+        .hero {
+            padding: 180px 48px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero-sub {
+            font-size: 1.1875rem;
+            color: var(--ink-2);
+            line-height: 1.75;
+            max-width: 640px;
+            margin-bottom: 40px;
+        }
+
+        .pillars {
+            padding: 80px 48px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .pillars-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .pillars-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+        }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .pillar {
+            padding: 32px;
+            background: var(--bg);
+            border-radius: 16px;
+        }
+        .pillar h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        .pillar p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 100px 48px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 24px;
+        }
+        .section-title em { font-style: italic; }
+        .section-text p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+        .section-text strong { color: var(--ink); font-weight: 600; }
+
+        .approach-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+        .approach-list li {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .approach-list li:first-child { border-top: 1px solid var(--border); }
+        .approach-num {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--accent);
+            min-width: 40px;
+        }
+        .approach-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .approach-content p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .dark-section {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 100px 48px;
+            margin: 0;
+            max-width: none;
+        }
+        .dark-section .section-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .dark-section .section-label { color: rgba(255,255,255,0.4); }
+        .dark-section .section-title { color: var(--bg); }
+        .dark-section p { color: rgba(255,255,255,0.7); }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .result-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .result-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9375rem;
+        }
+
+        .cta {
+            background: var(--accent);
+            text-align: center;
+            padding: 120px 48px;
+            max-width: none;
+        }
+        .cta h2 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .cta p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        .cta .btn {
+            background: white;
+            color: var(--accent);
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            padding: 48px;
+            background: var(--ink);
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-text { color: rgba(255,255,255,0.4); font-size: 0.875rem; }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+        @media (max-width: 900px) {
+            .section-grid { grid-template-columns: 1fr; gap: 48px; }
+            .results-grid, .pillars-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            nav, .hero, section, .pillars, .cta { padding-left: 24px; padding-right: 24px; }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Signyl</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services" class="active">Services</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+            </ul>
+            <a href="mailto:ben@signyl.io" class="nav-cta">Get in touch</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-label fade-up">SEO</div>
+        <h1 class="fade-up">Organic growth that <em>compounds.</em></h1>
+        <p class="hero-sub fade-up">SEO isn't a hack. It's a compounding asset. We build organic visibility that grows stronger over time through technical excellence, content that earns links, and signal analysis that finds ranking opportunities others miss.</p>
+    </section>
+
+    <div class="pillars">
+        <div class="pillars-inner">
+            <div class="pillars-label fade-up">Three Pillars</div>
+            <div class="pillars-grid fade-up">
+                <div class="pillar">
+                    <h3>Technical SEO</h3>
+                    <p>Site architecture, crawlability, Core Web Vitals, structured data. The foundation that makes everything else work.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Content Strategy</h3>
+                    <p>Content that answers real questions, earns real links, and builds real authority. Not content for content's sake.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Authority Building</h3>
+                    <p>Digital PR, link earning, and brand signals that tell Google you're the real deal in your space.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">The Problem</div>
+                <h2 class="section-title fade-up">Why most SEO <em>stalls</em></h2>
+            </div>
+            <div class="section-text fade-up">
+                <p>Most SEO is backwards. Teams chase keywords without understanding intent. They publish content without a distribution strategy. They build links without relevance signals.</p>
+                <p><strong>The result:</strong> Rankings that plateau. Traffic that flatlines. And a lot of wasted content sitting at position 15 where no one will ever see it.</p>
+                <p>We take a signal-first approach. Instead of guessing what Google wants, we analyze what's actually working, reverse engineer the patterns, then build content and links that fit those patterns.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">Our Approach</div>
+                <h2 class="section-title fade-up">SEO that actually <em>moves</em></h2>
+            </div>
+            <div class="fade-up">
+                <ul class="approach-list">
+                    <li>
+                        <span class="approach-num">01</span>
+                        <div class="approach-content">
+                            <h4>Technical Foundation</h4>
+                            <p>Full technical audit. Crawl optimization. Core Web Vitals. Schema markup. The unsexy stuff that makes or breaks rankings.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">02</span>
+                        <div class="approach-content">
+                            <h4>Search Signal Analysis</h4>
+                            <p>We analyze top-ranking content to understand what Google actually rewards in your space. Not generic "best practices," specific signals that matter for your keywords.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">03</span>
+                        <div class="approach-content">
+                            <h4>Content That Earns</h4>
+                            <p>Content built to rank and earn links. We identify content gaps, create genuinely useful resources, then promote them to people who will actually link.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">04</span>
+                        <div class="approach-content">
+                            <h4>Authority Acceleration</h4>
+                            <p>Strategic link building through digital PR, data-driven outreach, and creating linkable assets. Real links from real sites, not spam.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">05</span>
+                        <div class="approach-content">
+                            <h4>Continuous Optimization</h4>
+                            <p>Content refreshes. Internal linking optimization. Cannibalization fixes. The ongoing work that compounds rankings over time.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="dark-section">
+        <div class="section-inner">
+            <div class="section-label fade-up">Results</div>
+            <h2 class="section-title fade-up">What compounding SEO looks like</h2>
+            <p class="fade-up" style="max-width: 600px; font-size: 1.0625rem; line-height: 1.75;">Average results across our SEO clients after 12 months of engagement.</p>
+            <div class="results-grid fade-up">
+                <div class="result-card">
+                    <div class="result-num">+187%</div>
+                    <div class="result-label">Organic traffic increase</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">+312%</div>
+                    <div class="result-label">Keyword visibility growth</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">+89%</div>
+                    <div class="result-label">Organic revenue lift</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">Our Edge</div>
+                <h2 class="section-title fade-up">ML meets <em>editorial judgment</em></h2>
+            </div>
+            <div class="section-text fade-up">
+                <p>Our SEO approach combines scale with precision. ML helps us analyze thousands of ranking signals, identify content opportunities, and spot technical issues across large sites.</p>
+                <p>But rankings aren't just algorithms. They're humans at Google making quality judgments. That's why we layer human editorial expertise on top of data: <strong>knowing what makes content genuinely useful, not just optimized.</strong></p>
+                <p>The combination is what makes organic growth compound instead of plateau.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="fade-up">Ready to build organic growth?</h2>
+        <p class="fade-up">Let's talk about SEO that actually moves the needle.</p>
+        <a href="mailto:ben@signyl.io" class="btn fade-up">Get in touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Signyl</div>
+            <div class="footer-links">
+                <a href="mailto:ben@signyl.io">Contact</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

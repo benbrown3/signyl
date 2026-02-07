@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRO — Signyl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #FAF9F7;
+            --surface: #FFFFFF;
+            --ink: #1a1a1a;
+            --ink-2: #4a4a4a;
+            --ink-3: #8a8a8a;
+            --accent: #E85A2A;
+            --accent-hover: #D14E22;
+            --accent-light: rgba(232,90,42,0.08);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            background: rgba(250,249,247,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--ink-2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-cta:hover { background: var(--accent-hover); transform: scale(1.02); }
+
+        .hero {
+            padding: 180px 48px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero-sub {
+            font-size: 1.1875rem;
+            color: var(--ink-2);
+            line-height: 1.75;
+            max-width: 640px;
+            margin-bottom: 40px;
+        }
+
+        .equation {
+            padding: 80px 48px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .equation-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .equation-display {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-style: italic;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+        .equation-display span { color: var(--accent); }
+        .equation-sub {
+            color: var(--ink-2);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 100px 48px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 24px;
+        }
+        .section-title em { font-style: italic; }
+        .section-text p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+        .section-text strong { color: var(--ink); font-weight: 600; }
+
+        .approach-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+        .approach-list li {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .approach-list li:first-child { border-top: 1px solid var(--border); }
+        .approach-num {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--accent);
+            min-width: 40px;
+        }
+        .approach-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .approach-content p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .dark-section {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 100px 48px;
+            margin: 0;
+            max-width: none;
+        }
+        .dark-section .section-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .dark-section .section-label { color: rgba(255,255,255,0.4); }
+        .dark-section .section-title { color: var(--bg); }
+        .dark-section p { color: rgba(255,255,255,0.7); }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .result-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .result-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9375rem;
+        }
+
+        .test-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .test-type {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+        .test-type h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .test-type p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .cta {
+            background: var(--accent);
+            text-align: center;
+            padding: 120px 48px;
+            max-width: none;
+        }
+        .cta h2 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .cta p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        .cta .btn {
+            background: white;
+            color: var(--accent);
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            padding: 48px;
+            background: var(--ink);
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-text { color: rgba(255,255,255,0.4); font-size: 0.875rem; }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+        @media (max-width: 900px) {
+            .section-grid { grid-template-columns: 1fr; gap: 48px; }
+            .results-grid, .test-types { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            nav, .hero, section, .equation, .cta { padding-left: 24px; padding-right: 24px; }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Signyl</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services" class="active">Services</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+            </ul>
+            <a href="mailto:ben@signyl.io" class="nav-cta">Get in touch</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-label fade-up">Conversion Rate Optimization</div>
+        <h1 class="fade-up">More revenue, <em>same traffic.</em></h1>
+        <p class="hero-sub fade-up">Every visitor is a signal. Every click is data. CRO is the discipline of reading those signals and turning more visitors into customers through statistically rigorous experimentation.</p>
+    </section>
+
+    <div class="equation">
+        <div class="equation-inner fade-up">
+            <div class="equation-display">Traffic × <span>Conversion Rate</span> × AOV = Revenue</div>
+            <p class="equation-sub">Most teams only optimize traffic. Smart teams know that improving conversion rate has the same impact with less spend.</p>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">The Problem</div>
+                <h2 class="section-title fade-up">Why most CRO <em>fails</em></h2>
+            </div>
+            <div class="section-text fade-up">
+                <p>Most "CRO" is just random changes with fancy names. Change the button color. Move the form. Add urgency messaging. Then declare victory when numbers go up (ignoring that they would have gone up anyway).</p>
+                <p><strong>Real CRO is science.</strong> It requires statistical rigor, proper sample sizes, and the discipline to call tests inconclusive when they are. It means testing hypotheses, not hunches.</p>
+                <p>We run experiments that actually prove causation. When we say a change improved conversion rate, we mean it with 95%+ confidence.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">Our Approach</div>
+                <h2 class="section-title fade-up">Experimentation with <em>rigor</em></h2>
+            </div>
+            <div class="fade-up">
+                <ul class="approach-list">
+                    <li>
+                        <span class="approach-num">01</span>
+                        <div class="approach-content">
+                            <h4>Quantitative Analysis</h4>
+                            <p>We start with data, not opinions. Funnel analysis, heatmaps, session recordings, and user behavior data to identify where conversions are actually being lost.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">02</span>
+                        <div class="approach-content">
+                            <h4>Hypothesis Development</h4>
+                            <p>Every test starts with a clear hypothesis: "If we change X, we expect Y because Z." No random "let's try this" experiments.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">03</span>
+                        <div class="approach-content">
+                            <h4>Statistical Experiment Design</h4>
+                            <p>Proper sample size calculations. Bayesian or frequentist analysis depending on the context. Controls for seasonality and external factors.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">04</span>
+                        <div class="approach-content">
+                            <h4>Rigorous Analysis</h4>
+                            <p>We wait for statistical significance. We segment results. We look for interaction effects. And we're honest when tests are inconclusive.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-num">05</span>
+                        <div class="approach-content">
+                            <h4>Compounding Wins</h4>
+                            <p>Small, proven improvements compound. A 5% lift here, 8% there. Over a year, that's transformative. We build a testing velocity that compounds gains.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">What We Test</div>
+                <h2 class="section-title fade-up">High-impact <em>experiments</em></h2>
+            </div>
+            <div class="fade-up">
+                <div class="test-types">
+                    <div class="test-type">
+                        <h4>Pricing & Offers</h4>
+                        <p>Price presentation, discount structures, bundle configurations, urgency mechanics.</p>
+                    </div>
+                    <div class="test-type">
+                        <h4>Page Structure</h4>
+                        <p>Information hierarchy, content ordering, social proof placement, friction reduction.</p>
+                    </div>
+                    <div class="test-type">
+                        <h4>Checkout Flow</h4>
+                        <p>Form optimization, payment options, shipping presentation, cart abandonment recovery.</p>
+                    </div>
+                    <div class="test-type">
+                        <h4>Messaging & Copy</h4>
+                        <p>Value propositions, headlines, product descriptions, objection handling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="dark-section">
+        <div class="section-inner">
+            <div class="section-label fade-up">Results</div>
+            <h2 class="section-title fade-up">What rigorous CRO delivers</h2>
+            <p class="fade-up" style="max-width: 600px; font-size: 1.0625rem; line-height: 1.75;">Average results across our CRO engagements after 6 months of testing.</p>
+            <div class="results-grid fade-up">
+                <div class="result-card">
+                    <div class="result-num">+34%</div>
+                    <div class="result-label">Conversion rate lift</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">+28%</div>
+                    <div class="result-label">Revenue per visitor</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">12×</div>
+                    <div class="result-label">Average ROI on CRO investment</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-grid">
+            <div>
+                <div class="section-label fade-up">Our Edge</div>
+                <h2 class="section-title fade-up">ML-powered <em>signal detection</em></h2>
+            </div>
+            <div class="section-text fade-up">
+                <p>Traditional CRO tests one thing at a time. That's necessary for causal inference, but it's slow. Our ML models help us move faster in two ways:</p>
+                <p><strong>Hypothesis generation:</strong> We analyze behavioral patterns across thousands of sessions to identify where conversion is being lost and why. This surfaces high-impact test ideas faster than manual analysis.</p>
+                <p><strong>Segment discovery:</strong> Our models identify user segments that respond differently to changes. A test that's flat overall might be +20% for mobile users from paid search. We find those signals.</p>
+                <p>The result: higher testing velocity, better hypotheses, and compound gains that add up to transformative improvement over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="fade-up">Ready to convert more visitors?</h2>
+        <p class="fade-up">Let's talk about CRO that's actually rigorous.</p>
+        <a href="mailto:ben@signyl.io" class="btn fade-up">Get in touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Signyl</div>
+            <div class="footer-links">
+                <a href="mailto:ben@signyl.io">Contact</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
