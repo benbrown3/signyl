@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signyl — Growth Through Signal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+        }
+        
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0c0c0c;
+            --surface: #141414;
+            --surface-2: #1c1c1c;
+            --border: rgba(255,255,255,0.06);
+            --text: #f5f5f4;
+            --text-2: #a8a29e;
+            --text-3: #57534e;
+            --accent: #f97316;
+            --accent-glow: rgba(249,115,22,0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Satoshi', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .serif { font-family: 'Instrument Serif', Georgia, serif; }
+
+        /* GRID BACKGROUND */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .grid-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 32px;
+            background: rgba(12,12,12,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-cta {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .nav-cta:hover { 
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 140px 32px 100px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 32px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-2);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px var(--accent-glow);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-ghost:hover {
+            background: var(--surface);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        /* CREDENTIALS */
+        .credentials {
+            margin-top: 80px;
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .cred-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-3);
+            font-size: 0.9375rem;
+        }
+        .cred-item strong {
+            color: var(--text-2);
+            font-weight: 600;
+        }
+        .cred-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* SECTION */
+        section {
+            padding: 120px 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .section-title em { font-style: italic; }
+
+        /* ABOUT */
+        .about {
+            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+        }
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .about-text {
+            max-width: 580px;
+        }
+        .about-text p {
+            color: var(--text-2);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .about-text strong { color: var(--text); font-weight: 600; }
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .stat {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .stat-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-num span { color: var(--accent); }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-3);
+        }
+
+        /* SERVICES */
+        .services {
+            background: var(--surface);
+        }
+        .services-header {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .service-card {
+            background: var(--bg);
+            padding: 36px 28px;
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            background: var(--surface-2);
+        }
+        .service-num {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        .service-card p {
+            color: var(--text-2);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* APPROACH */
+        .approach {
+            background: var(--bg);
+        }
+        .approach-header {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        .approach-header .section-title {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .approach-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .approach-step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .approach-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .approach-step:hover::before { opacity: 1; }
+        .step-num {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .approach-step h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        .approach-step p {
+            color: var(--text-2);
+            font-size: 0.9375rem;
+            line-height: 1.65;
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--surface);
+            text-align: center;
+            padding: 140px 32px;
+        }
+        .cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .cta h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .cta h2 em { font-style: italic; }
+        .cta p {
+            color: var(--text-2);
+            font-size: 1.125rem;
+            max-width: 480px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 32px;
+            background: var(--bg);
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-text {
+            color: var(--text-3);
+            font-size: 0.875rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: var(--text-3);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-2); }
+
+        /* MOBILE */
+        @media (max-width: 1000px) {
+            .nav-links { display: none; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 800px) {
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .approach-steps { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .hero { padding: 120px 24px 80px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-sub { font-size: 1.0625rem; }
+            section { padding: 80px 24px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .credentials { flex-direction: column; gap: 16px; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Signyl</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#approach">Approach</a></li>
+            </ul>
+            <a href="mailto:ben@signyl.io" class="nav-cta">Get in touch</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-eyebrow fade-up">ML-Powered Growth</div>
+            <h1 class="fade-up stagger-1">Find the <em>signal</em>,<br>cut the noise.</h1>
+            <p class="hero-sub fade-up stagger-2">Most marketing runs on incomplete data and gut instinct. We use machine learning to isolate what's actually driving growth, then scale it. Pattern recognition. Anomaly detection. Real results.</p>
+            <div class="hero-cta fade-up stagger-3">
+                <a href="mailto:ben@signyl.io" class="btn btn-primary">Start a conversation →</a>
+                <a href="#services" class="btn btn-ghost">View services</a>
+            </div>
+            <div class="credentials fade-up stagger-4">
+                <div class="cred-item">
+                    <div class="cred-dot"></div>
+                    <span><strong>Ex-Google</strong></span>
+                </div>
+                <div class="cred-item">
+                    <div class="cred-dot"></div>
+                    <span><strong>200+</strong> brands managed</span>
+                </div>
+                <div class="cred-item">
+                    <div class="cred-dot"></div>
+                    <span><strong>$50M+</strong> ad spend optimized</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-text fade-up">
+                <div class="section-label">About</div>
+                <h2 class="section-title">Quantitative methods<br>for <em>growth.</em></h2>
+                <p>Every agency claims to be "data-driven." We actually are. Signyl was founded on an observation: <strong>most marketing decisions run on incomplete signal</strong>. Teams optimize vanity metrics, burn budget on noise, and miss the patterns that actually move revenue.</p>
+                <p>We built ML models that <strong>separate signal from noise</strong> across your entire funnel. Pattern recognition finds what's working. Anomaly detection catches what's breaking. Then we act on it with real changes that compound over time.</p>
+            </div>
+            <div class="about-stats fade-up">
+                <div class="stat">
+                    <div class="stat-num">3.2<span>×</span></div>
+                    <div class="stat-label">Avg. ROAS improvement</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">-41<span>%</span></div>
+                    <div class="stat-label">Avg. CPA reduction</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">+187<span>%</span></div>
+                    <div class="stat-label">Avg. organic traffic lift</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">96<span>%</span></div>
+                    <div class="stat-label">Client retention</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services-header fade-up">
+            <div class="section-label">Services</div>
+            <h2 class="section-title">End-to-end <em>growth.</em></h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-up">
+                <div class="service-num">01</div>
+                <h3>Paid Media</h3>
+                <p>Google, Meta, Shopping, Performance Max. ML-powered bid optimization, creative testing, and audience signal extraction.</p>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-num">02</div>
+                <h3>SEO</h3>
+                <p>Technical SEO, content strategy, and authority building driven by search signal analysis. Compounding organic growth.</p>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-num">03</div>
+                <h3>GEO</h3>
+                <p>Generative Engine Optimization. Get cited by ChatGPT, Perplexity, Gemini. The next frontier most agencies haven't figured out.</p>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-num">04</div>
+                <h3>CRO</h3>
+                <p>Conversion rate optimization through statistically significant experiments. More revenue from the same traffic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="approach" id="approach">
+        <div class="approach-header fade-up">
+            <div class="section-label">Approach</div>
+            <h2 class="section-title">Ingest. Isolate. <em>Amplify.</em></h2>
+        </div>
+        <div class="approach-steps">
+            <div class="approach-step fade-up">
+                <div class="step-num">01</div>
+                <h3>Ingest</h3>
+                <p>We connect to every data source in your stack. Ad platforms, analytics, CRM, revenue data. A unified signal layer with no blind spots.</p>
+            </div>
+            <div class="approach-step fade-up">
+                <div class="step-num">02</div>
+                <h3>Isolate</h3>
+                <p>Our ML models identify signals that correlate with revenue. We separate what matters from what's noise. This is where most agencies stop.</p>
+            </div>
+            <div class="approach-step fade-up">
+                <div class="step-num">03</div>
+                <h3>Amplify</h3>
+                <p>Once the signal is isolated, we scale it. Budget shifts, creative changes, targeting refinements. All driven by extracted signal.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-inner">
+            <h2 class="fade-up">Ready to find your <em>signal?</em></h2>
+            <p class="fade-up">We work with a limited number of clients to ensure depth over breadth. If you're serious about growth, let's talk.</p>
+            <a href="mailto:ben@signyl.io" class="btn btn-primary fade-up">Get in touch →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Signyl</div>
+            <div class="footer-links">
+                <a href="mailto:ben@signyl.io">Contact</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

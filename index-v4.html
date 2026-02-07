@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signyl — Growth Through Signal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #FAF9F7;
+            --surface: #FFFFFF;
+            --ink: #1a1a1a;
+            --ink-2: #4a4a4a;
+            --ink-3: #8a8a8a;
+            --accent: #C84B31;
+            --accent-light: rgba(200,75,49,0.08);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .display { 
+            font-family: 'Fraunces', Georgia, serif;
+            font-optical-sizing: auto;
+        }
+
+        /* NOISE TEXTURE */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            background: rgba(250,249,247,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--ink-2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-cta {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-cta:hover { 
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 140px 48px 100px;
+            gap: 80px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+        .hero-content { max-width: 620px; }
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 32px;
+            padding: 8px 16px;
+            background: var(--accent-light);
+            border-radius: 4px;
+        }
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 28px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .hero-sub {
+            font-size: 1.1875rem;
+            color: var(--ink-2);
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(200,75,49,0.25);
+        }
+        .btn-link {
+            color: var(--ink);
+            padding: 16px 8px;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        .btn-link:hover { color: var(--accent); }
+
+        /* HERO VISUAL */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .signal-viz {
+            width: 100%;
+            max-width: 480px;
+            aspect-ratio: 1;
+            position: relative;
+        }
+        .signal-ring {
+            position: absolute;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .signal-ring:nth-child(1) { inset: 0%; animation-delay: 0s; }
+        .signal-ring:nth-child(2) { inset: 15%; animation-delay: 0.5s; }
+        .signal-ring:nth-child(3) { inset: 30%; animation-delay: 1s; }
+        .signal-ring:nth-child(4) { inset: 45%; animation-delay: 1.5s; background: var(--accent-light); border-color: var(--accent); }
+        .signal-center {
+            position: absolute;
+            inset: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* CREDENTIALS BAR */
+        .cred-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 32px 48px;
+            background: var(--surface);
+        }
+        .cred-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+            flex-wrap: wrap;
+        }
+        .cred-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--ink-3);
+            font-size: 0.9375rem;
+        }
+        .cred-item strong {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        /* SECTION */
+        section {
+            padding: 120px 48px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .section-title em { font-style: italic; }
+
+        /* ABOUT */
+        .about { background: var(--bg); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+        .about-text p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 24px;
+        }
+        .about-text strong { color: var(--ink); font-weight: 600; }
+        .about-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+        .about-list li {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: baseline;
+        }
+        .about-list li:first-child { border-top: 1px solid var(--border); }
+        .about-list .num {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            color: var(--accent);
+            min-width: 32px;
+        }
+        .about-list .label {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+        }
+
+        /* SERVICES */
+        .services { 
+            background: var(--ink);
+            color: var(--bg);
+        }
+        .services .section-label { color: rgba(255,255,255,0.4); }
+        .services .section-title { color: var(--bg); }
+        .services-intro {
+            max-width: 600px;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.0625rem;
+            line-height: 1.75;
+            margin-bottom: 64px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .service-card {
+            padding: 48px 32px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s;
+        }
+        .service-card:nth-child(4n) { border-right: none; }
+        .service-card:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        .service-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 24px;
+            line-height: 1;
+        }
+        .service-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.375rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: var(--bg);
+        }
+        .service-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9375rem;
+            line-height: 1.65;
+        }
+
+        /* APPROACH */
+        .approach { background: var(--surface); }
+        .approach-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .approach-header .section-title {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .approach-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .approach-step {
+            padding: 48px 40px;
+            background: var(--bg);
+            border-radius: 24px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .approach-step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.06);
+        }
+        .step-num {
+            font-family: 'Fraunces', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .approach-step h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        .approach-step p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--accent);
+            text-align: center;
+            padding: 140px 48px;
+        }
+        .cta h2 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .cta h2 em { font-style: italic; }
+        .cta p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .cta .btn {
+            background: white;
+            color: var(--accent);
+        }
+        .cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 48px;
+            background: var(--ink);
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-text {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.875rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+        /* MOBILE */
+        @media (max-width: 1100px) {
+            .hero { grid-template-columns: 1fr; gap: 60px; }
+            .hero-visual { order: -1; }
+            .signal-viz { max-width: 320px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .service-card:nth-child(2n) { border-right: none; }
+        }
+        @media (max-width: 800px) {
+            nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .hero, section { padding-left: 24px; padding-right: 24px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .approach-steps { grid-template-columns: 1fr; }
+            .cred-bar { padding: 24px; }
+            .cred-inner { gap: 32px; }
+        }
+        @media (max-width: 600px) {
+            .hero { padding-top: 120px; }
+            .hero h1 { font-size: 2.25rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { border-right: none !important; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Signyl</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#approach">Approach</a></li>
+            </ul>
+            <a href="mailto:ben@signyl.io" class="nav-cta">Get in touch</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow fade-up">ML-Powered Growth</div>
+            <h1 class="fade-up stagger-1">Find the <em>signal,</em><br>cut the noise.</h1>
+            <p class="hero-sub fade-up stagger-2">Most marketing runs on incomplete data and gut instinct. We use machine learning to isolate what's actually driving growth, then scale it. Pattern recognition. Anomaly detection. Real results.</p>
+            <div class="hero-cta fade-up stagger-3">
+                <a href="mailto:ben@signyl.io" class="btn btn-primary">Start a conversation</a>
+                <a href="#services" class="btn btn-link">View services ↓</a>
+            </div>
+        </div>
+        <div class="hero-visual fade-up">
+            <div class="signal-viz">
+                <div class="signal-ring"></div>
+                <div class="signal-ring"></div>
+                <div class="signal-ring"></div>
+                <div class="signal-ring"></div>
+                <div class="signal-center">signal</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cred-bar">
+        <div class="cred-inner fade-up">
+            <div class="cred-item">
+                <strong>Google</strong>
+                <span>Alumni</span>
+            </div>
+            <div class="cred-item">
+                <strong>200+</strong>
+                <span>Brands managed</span>
+            </div>
+            <div class="cred-item">
+                <strong>$50M+</strong>
+                <span>Ad spend optimized</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <div class="section-label">About</div>
+                    <h2 class="section-title">Quantitative methods for <em>growth.</em></h2>
+                    <p>Every agency claims to be "data-driven." We actually are. Signyl was founded on an observation: <strong>most marketing decisions run on incomplete signal</strong>. Teams optimize vanity metrics, burn budget on noise, and miss the patterns that actually move revenue.</p>
+                    <p>We built ML models that <strong>separate signal from noise</strong> across your entire funnel. Pattern recognition finds what's working. Anomaly detection catches what's breaking. Then we act on it with real changes that compound over time.</p>
+                </div>
+                <div class="about-list fade-up">
+                    <ul>
+                        <li>
+                            <span class="num">3.2×</span>
+                            <span class="label">Average ROAS improvement</span>
+                        </li>
+                        <li>
+                            <span class="num">-41%</span>
+                            <span class="label">Average CPA reduction</span>
+                        </li>
+                        <li>
+                            <span class="num">+187%</span>
+                            <span class="label">Average organic traffic lift</span>
+                        </li>
+                        <li>
+                            <span class="num">96%</span>
+                            <span class="label">Client retention rate</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-label fade-up">Services</div>
+            <h2 class="section-title fade-up">End-to-end <em>growth.</em></h2>
+            <p class="services-intro fade-up">Four disciplines, one integrated approach. Each powered by signal extraction, not guesswork.</p>
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <div class="service-num">1</div>
+                    <h3>Paid Media</h3>
+                    <p>Google, Meta, Shopping, Performance Max. ML-powered bid optimization, creative testing, and audience signal extraction.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="service-num">2</div>
+                    <h3>SEO</h3>
+                    <p>Technical SEO, content strategy, and authority building driven by search signal analysis. Compounding organic growth.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="service-num">3</div>
+                    <h3>GEO</h3>
+                    <p>Generative Engine Optimization. Get cited by ChatGPT, Perplexity, Gemini. The next frontier most agencies haven't figured out.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="service-num">4</div>
+                    <h3>CRO</h3>
+                    <p>Conversion rate optimization through statistically significant experiments. More revenue from the same traffic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="approach" id="approach">
+        <div class="container">
+            <div class="approach-header fade-up">
+                <div class="section-label">Approach</div>
+                <h2 class="section-title">Ingest. Isolate. <em>Amplify.</em></h2>
+            </div>
+            <div class="approach-steps">
+                <div class="approach-step fade-up">
+                    <div class="step-num">01</div>
+                    <h3>Ingest</h3>
+                    <p>We connect to every data source in your stack. Ad platforms, analytics, CRM, revenue data. A unified signal layer with no blind spots.</p>
+                </div>
+                <div class="approach-step fade-up">
+                    <div class="step-num">02</div>
+                    <h3>Isolate</h3>
+                    <p>Our ML models identify signals that correlate with revenue. We separate what matters from what's noise. This is where most agencies stop.</p>
+                </div>
+                <div class="approach-step fade-up">
+                    <div class="step-num">03</div>
+                    <h3>Amplify</h3>
+                    <p>Once the signal is isolated, we scale it. Budget shifts, creative changes, targeting refinements. All driven by extracted signal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="fade-up">Ready to find your <em>signal?</em></h2>
+        <p class="fade-up">We work with a limited number of clients to ensure depth over breadth. If you're serious about growth, let's talk.</p>
+        <a href="mailto:ben@signyl.io" class="btn fade-up">Get in touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Signyl</div>
+            <div class="footer-links">
+                <a href="mailto:ben@signyl.io">Contact</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+        
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
