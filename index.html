@@ -88,6 +88,55 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--ink); }
+        
+        /* Dropdown */
+        .nav-links li { position: relative; }
+        .dropdown-toggle { cursor: pointer; }
+        .dropdown-toggle::after {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 6px;
+            margin-bottom: 2px;
+            transition: transform 0.2s;
+        }
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(-135deg); }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 160px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--ink-2);
+            font-size: 0.875rem;
+            transition: all 0.15s;
+        }
+        .dropdown-menu a:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+        
         .nav-cta {
             background: var(--accent);
             color: white;
@@ -589,7 +638,15 @@
             </a>
             <ul class="nav-links">
                 <li><a href="/">About</a></li>
-                <li><a href="/">Services</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Services</span>
+                    <div class="dropdown-menu">
+                        <a href="/paid-media">Paid Media</a>
+                        <a href="/seo">SEO</a>
+                        <a href="/geo">GEO</a>
+                        <a href="/cro">CRO</a>
+                    </div>
+                </li>
                 <li><a href="/">Approach</a></li>
             </ul>
             <a href="/contact" class="nav-cta">Get in touch</a>

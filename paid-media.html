@@ -81,6 +81,56 @@
             transition: color 0.2s;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        
+        /* Dropdown */
+        .nav-links li { position: relative; }
+        .dropdown-toggle { cursor: pointer; color: var(--ink-2); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+        .dropdown-toggle:hover, .dropdown-toggle.active { color: var(--accent); }
+        .dropdown-toggle::after {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 6px;
+            margin-bottom: 2px;
+            transition: transform 0.2s;
+        }
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(-135deg); }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 160px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--ink-2);
+            font-size: 0.875rem;
+            transition: all 0.15s;
+        }
+        .dropdown-menu a:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+        
         .nav-cta {
             background: var(--accent);
             color: white;
@@ -345,7 +395,15 @@
             <a href="/" class="logo"><svg viewBox="0 0 100 80" width="32" height="26" fill="none" style="vertical-align: middle; margin-right: 8px;"><path d="M5 50 Q15 48 25 50 Q35 52 42 50" stroke="var(--ink-3)" stroke-width="1.5" fill="none"/><path d="M58 50 Q65 52 75 50 Q85 48 95 50" stroke="var(--ink-3)" stroke-width="1.5" fill="none"/><path d="M42 50 Q46 50 48 35 Q50 15 50 15 Q50 15 52 35 Q54 50 58 50" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="50" cy="15" r="6" fill="var(--accent)" opacity="0.2"/><circle cx="50" cy="15" r="3" fill="var(--accent)"/></svg>Signyl</a>
             <ul class="nav-links">
                 <li><a href="/">About</a></li>
-                <li><a href="/" class="active">Services</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle active">Services</span>
+                    <div class="dropdown-menu">
+                        <a href="/paid-media">Paid Media</a>
+                        <a href="/seo">SEO</a>
+                        <a href="/geo">GEO</a>
+                        <a href="/cro">CRO</a>
+                    </div>
+                </li>
                 <li><a href="/">Approach</a></li>
             </ul>
             <a href="/contact" class="nav-cta">Get in touch</a>
