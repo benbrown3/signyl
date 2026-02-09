@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Approach — Signyl</title>
+    <meta name="description" content="How Signyl combines machine learning with human expertise to deliver consistent, compounding growth.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #FAF9F7;
+            --surface: #FFFFFF;
+            --ink: #1a1a1a;
+            --ink-2: #4a4a4a;
+            --ink-3: #8a8a8a;
+            --accent: #E85A2A;
+            --accent-hover: #D14E22;
+            --accent-light: rgba(232,90,42,0.08);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            background: rgba(250,249,247,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--ink-2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        
+        .nav-links li { position: relative; }
+        .dropdown-toggle { cursor: pointer; color: var(--ink-2); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+        .dropdown-toggle:hover { color: var(--ink); }
+        .dropdown-toggle::after {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 6px;
+            margin-bottom: 2px;
+            transition: transform 0.2s;
+        }
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(-135deg); }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 160px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--ink-2);
+            font-size: 0.875rem;
+            transition: all 0.15s;
+        }
+        .dropdown-menu a:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+        
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-cta:hover { 
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* MOBILE MENU */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 200;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--ink);
+            transition: all 0.3s;
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            z-index: 150;
+            padding: 100px 24px 40px;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: var(--ink);
+            cursor: pointer;
+            line-height: 1;
+            padding: 8px;
+        }
+        .mobile-menu a {
+            font-size: 1.5rem;
+            font-family: 'Fraunces', serif;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .mobile-menu .mobile-cta {
+            margin-top: 24px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 100px;
+            border: none;
+            font-weight: 600;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            padding: 180px 48px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .page-hero .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+        .page-hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .page-hero h1 em { font-style: italic; color: var(--accent); }
+        .page-hero .lead {
+            font-size: 1.1875rem;
+            color: var(--ink-2);
+            line-height: 1.75;
+            max-width: 700px;
+        }
+
+        /* SECTION */
+        section {
+            padding: 100px 48px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .section-title em { font-style: italic; }
+
+        /* THE PROBLEM */
+        .problem {
+            background: var(--ink);
+            color: var(--bg);
+        }
+        .problem .section-label { color: rgba(255,255,255,0.4); }
+        .problem .section-title { color: var(--bg); }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-top: 48px;
+        }
+        .problem-text p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 24px;
+        }
+        .problem-list {
+            list-style: none;
+        }
+        .problem-list li {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+        }
+        .problem-list li:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+        .problem-list .icon {
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+        .problem-list .text {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .problem-list strong { color: var(--bg); }
+
+        /* PHILOSOPHY */
+        .philosophy {
+            background: var(--bg);
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .philosophy-content p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 24px;
+        }
+        .philosophy-content strong { color: var(--ink); }
+        .philosophy-quote {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid var(--border);
+        }
+        .philosophy-quote blockquote {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+        .philosophy-quote blockquote em { color: var(--accent); }
+        .philosophy-quote cite {
+            font-style: normal;
+            color: var(--ink-3);
+            font-size: 0.9375rem;
+        }
+
+        /* PROCESS */
+        .process {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .process-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+        .process-step {
+            padding: 48px 40px;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+        .process-step:last-child { border-right: none; }
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+            background: var(--surface);
+            padding: 8px 0;
+        }
+        .process-step:last-child::after { display: none; }
+        .step-num {
+            font-family: 'Fraunces', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: var(--accent);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .process-step h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        .process-step p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .process-details {
+            list-style: none;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        .process-details li {
+            font-size: 0.875rem;
+            color: var(--ink-3);
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .process-details li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ML MODELS */
+        .models {
+            background: var(--bg);
+        }
+        .models-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 64px;
+        }
+        .models-intro p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+        }
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .model-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .model-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+            border-color: var(--accent);
+        }
+        .model-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+        .model-card h4 {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        .model-card p {
+            font-size: 0.8125rem;
+            color: var(--ink-3);
+            line-height: 1.5;
+        }
+
+        /* HUMAN + ML */
+        .combination {
+            background: var(--ink);
+            color: var(--bg);
+        }
+        .combination .section-label { color: rgba(255,255,255,0.4); }
+        .combination .section-title { color: var(--bg); }
+        .combo-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 64px;
+        }
+        .combo-card {
+            padding: 48px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .combo-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: var(--bg);
+        }
+        .combo-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .combo-list {
+            list-style: none;
+        }
+        .combo-list li {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.5);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .combo-list li:last-child { border-bottom: none; }
+        .combo-plus {
+            font-family: 'Fraunces', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+        .combo-result {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 64px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .combo-result h4 {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .combo-result p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* WHAT YOU GET */
+        .deliverables {
+            background: var(--bg);
+        }
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 64px;
+        }
+        .deliverable-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+        .deliverable-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        .deliverable-card p {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--accent);
+            text-align: center;
+            padding: 140px 48px;
+        }
+        .cta h2 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .cta h2 em { font-style: italic; }
+        .cta p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+            background: white;
+            color: var(--accent);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 48px;
+            background: var(--ink);
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-text {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.875rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .models-grid { grid-template-columns: repeat(2, 1fr); }
+            .combo-grid { grid-template-columns: 1fr; gap: 24px; }
+            .combo-plus { display: none; }
+        }
+        @media (max-width: 800px) {
+            nav { padding: 20px 24px; }
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            .page-hero, section { padding-left: 24px; padding-right: 24px; }
+            .philosophy-grid { grid-template-columns: 1fr; gap: 48px; }
+            .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+            .models-header { grid-template-columns: 1fr; gap: 32px; }
+            .process-steps { grid-template-columns: 1fr; }
+            .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+            .process-step::after { display: none; }
+            .process-step:last-child { border-bottom: none; }
+            .deliverables-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .page-hero { padding-top: 140px; }
+            .models-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">
+                <svg viewBox="0 0 100 80" width="32" height="26" fill="none" style="vertical-align: middle; margin-right: 8px;">
+                    <path d="M5 50 Q15 48 25 50 Q35 52 42 50" stroke="var(--ink-3)" stroke-width="1.5" fill="none"/>
+                    <path d="M58 50 Q65 52 75 50 Q85 48 95 50" stroke="var(--ink-3)" stroke-width="1.5" fill="none"/>
+                    <path d="M42 50 Q46 50 48 35 Q50 15 50 15 Q50 15 52 35 Q54 50 58 50" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <circle cx="50" cy="15" r="6" fill="var(--accent)" opacity="0.2"/>
+                    <circle cx="50" cy="15" r="3" fill="var(--accent)"/>
+                </svg>Signyl
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">About</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Services</span>
+                    <div class="dropdown-menu">
+                        <a href="/paid-media">Paid Media</a>
+                        <a href="/seo">SEO</a>
+                        <a href="/geo">GEO</a>
+                        <a href="/cro">CRO</a>
+                    </div>
+                </li>
+                <li><a href="/approach" class="active">Approach</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+            </ul>
+            <a href="/contact" class="nav-cta">Get in touch</a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+        <a href="/">About</a>
+        <a href="/paid-media">Paid Media</a>
+        <a href="/seo">SEO</a>
+        <a href="/geo">GEO</a>
+        <a href="/cro">CRO</a>
+        <a href="/approach">Approach</a>
+        <a href="/intelligence">Intelligence</a>
+        <a href="/contact" class="mobile-cta">Get in touch</a>
+    </div>
+
+    <header class="page-hero">
+        <div class="section-label fade-up">Our Approach</div>
+        <h1 class="fade-up">Data without expertise is just numbers. Expertise without data is just <em>opinion.</em></h1>
+        <p class="lead fade-up">Every agency claims to be "data-driven." We built the infrastructure to actually be it. Machine learning that spots patterns humans miss, combined with the judgment that algorithms can't replicate.</p>
+    </header>
+
+    <section class="problem">
+        <div class="container">
+            <div class="section-label fade-up">The Problem</div>
+            <h2 class="section-title fade-up">Why most marketing <em>underperforms.</em></h2>
+            <div class="problem-grid">
+                <div class="problem-text fade-up">
+                    <p>Marketing performance is volatile by nature. Platform algorithms change. Competition shifts. Seasonality hits. Consumer behavior evolves. Most agencies react to these changes after the damage is done.</p>
+                    <p>The result? Month-to-month chaos. Good quarters followed by bad ones. Budgets that swing wildly because nobody can predict what's coming.</p>
+                    <p>We built Signyl to solve this.</p>
+                </div>
+                <ul class="problem-list fade-up">
+                    <li>
+                        <span class="icon">⚡</span>
+                        <span class="text"><strong>Reactive optimization.</strong> By the time you see the problem in a dashboard, you've already lost money.</span>
+                    </li>
+                    <li>
+                        <span class="icon">📊</span>
+                        <span class="text"><strong>Vanity metrics.</strong> Clicks and impressions don't pay the bills. Revenue does.</span>
+                    </li>
+                    <li>
+                        <span class="icon">🎯</span>
+                        <span class="text"><strong>Platform tunnel vision.</strong> Optimizing channels in isolation misses the bigger picture.</span>
+                    </li>
+                    <li>
+                        <span class="icon">🔮</span>
+                        <span class="text"><strong>Gut-based decisions.</strong> "This feels right" doesn't scale. Data does.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-content fade-up">
+                    <div class="section-label">Philosophy</div>
+                    <h2 class="section-title">Find the <em>signal,</em> cut the noise.</h2>
+                    <p>Marketing data is noisy. Thousands of variables, most of them meaningless. The signal that actually predicts revenue is buried under layers of noise.</p>
+                    <p><strong>Our job is signal extraction.</strong> We built machine learning models specifically for this: identifying the patterns that correlate with revenue, filtering out everything else, and turning insight into action.</p>
+                    <p>But models don't make decisions. Humans do. That's why every recommendation comes with human judgment attached. We know when to trust the data and when the context demands something different.</p>
+                </div>
+                <div class="philosophy-quote fade-up">
+                    <blockquote>"The goal isn't more data. It's better <em>signal.</em>"</blockquote>
+                    <cite>— The principle behind everything we build</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="container">
+            <div class="process-header fade-up">
+                <div class="section-label">Process</div>
+                <h2 class="section-title">Ingest. Isolate. <em>Amplify.</em></h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-up">
+                    <div class="step-num">01</div>
+                    <h3>Ingest</h3>
+                    <p>We connect to every data source in your stack. Ad platforms, analytics, CRM, revenue data. A unified signal layer with no blind spots.</p>
+                    <ul class="process-details">
+                        <li>Google Ads, Meta, Microsoft, Amazon, TikTok</li>
+                        <li>GA4, Adobe Analytics, Mixpanel</li>
+                        <li>Salesforce, HubSpot, custom CRMs</li>
+                        <li>Revenue and transaction data</li>
+                    </ul>
+                </div>
+                <div class="process-step fade-up">
+                    <div class="step-num">02</div>
+                    <h3>Isolate</h3>
+                    <p>Our models identify signals that correlate with revenue. We separate what matters from what's noise. This is where most agencies stop.</p>
+                    <ul class="process-details">
+                        <li>Anomaly detection catches problems early</li>
+                        <li>Attribution modeling shows true impact</li>
+                        <li>Trend analysis predicts direction</li>
+                        <li>Budget optimization finds efficiency</li>
+                    </ul>
+                </div>
+                <div class="process-step fade-up">
+                    <div class="step-num">03</div>
+                    <h3>Amplify</h3>
+                    <p>Once the signal is isolated, we scale it. Budget shifts, creative changes, targeting refinements. All driven by extracted signal and expert judgment.</p>
+                    <ul class="process-details">
+                        <li>Data-backed recommendations</li>
+                        <li>Specific dollar amounts and targets</li>
+                        <li>Expected impact with confidence intervals</li>
+                        <li>Human review before action</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="models">
+        <div class="container">
+            <div class="models-header">
+                <div class="fade-up">
+                    <div class="section-label">Intelligence Layer</div>
+                    <h2 class="section-title">14 ML models working for <em>you.</em></h2>
+                </div>
+                <div class="models-intro fade-up">
+                    <p>Not black boxes. Interpretable models that explain their reasoning. Every recommendation comes with the data that supports it, the confidence level, and the expected impact.</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <div class="model-card fade-up">
+                    <div class="model-icon">📈</div>
+                    <h4>Forecaster</h4>
+                    <p>Predicts revenue and conversions 30 days out. Catches declines before they compound.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">🚨</div>
+                    <h4>Anomaly Detection</h4>
+                    <p>Spots cost spikes, CTR drops, and performance anomalies within hours, not days.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">🎯</div>
+                    <h4>Attribution</h4>
+                    <p>Data-driven attribution that shows true channel impact, not last-click guessing.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">💰</div>
+                    <h4>Budget Optimizer</h4>
+                    <p>Hill curve modeling to find the optimal spend level for each campaign.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">📊</div>
+                    <h4>Marketing Mix</h4>
+                    <p>Cross-channel impact modeling. See how channels work together.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">👤</div>
+                    <h4>Customer Lifetime Value</h4>
+                    <p>Predict long-term value to optimize acquisition costs.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">🔬</div>
+                    <h4>Incrementality</h4>
+                    <p>Measure true lift from marketing spend, not just correlation.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">🎨</div>
+                    <h4>Creative Fatigue</h4>
+                    <p>Detect when ads are wearing out before performance tanks.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">⚡</div>
+                    <h4>Bid Pacing</h4>
+                    <p>Optimize bid strategy timing for maximum efficiency.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">👥</div>
+                    <h4>Audience Saturation</h4>
+                    <p>Know when you've exhausted an audience before wasting spend.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">🔍</div>
+                    <h4>Search Term Intel</h4>
+                    <p>Identify high-value search terms and negative keyword opportunities.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">📅</div>
+                    <h4>Seasonality</h4>
+                    <p>Decompose seasonal patterns to set accurate baselines.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">📉</div>
+                    <h4>Trend Analysis</h4>
+                    <p>Detect momentum shifts with statistical significance testing.</p>
+                </div>
+                <div class="model-card fade-up">
+                    <div class="model-icon">📐</div>
+                    <h4>Conformal Prediction</h4>
+                    <p>Calibrated uncertainty estimates on every forecast.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="combination">
+        <div class="container">
+            <div class="section-label fade-up">The Combination</div>
+            <h2 class="section-title fade-up">Machine learning <em>+</em> human expertise.</h2>
+            <div class="combo-grid">
+                <div class="combo-card fade-up">
+                    <h3>What ML Does</h3>
+                    <p>Pattern recognition across millions of data points. Speed and scale that humans can't match.</p>
+                    <ul class="combo-list">
+                        <li>Process thousands of variables in seconds</li>
+                        <li>Detect anomalies within hours, not days</li>
+                        <li>Forecast with quantified uncertainty</li>
+                        <li>Find patterns buried in noise</li>
+                        <li>Learn and improve every week</li>
+                    </ul>
+                </div>
+                <div class="combo-plus">+</div>
+                <div class="combo-card fade-up">
+                    <h3>What Humans Do</h3>
+                    <p>Judgment, context, and the creative leaps that no algorithm can make.</p>
+                    <ul class="combo-list">
+                        <li>Understand business context and goals</li>
+                        <li>Know when to override the data</li>
+                        <li>Build strategy that algorithms can't</li>
+                        <li>Navigate stakeholder relationships</li>
+                        <li>Make the calls that matter</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="combo-result fade-up">
+                <h4>= Consistent, compounding growth</h4>
+                <p>Not month-to-month chaos. Smoothed volatility and predictable improvement. The kind of growth that compounds over years.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="deliverables">
+        <div class="container">
+            <div class="section-label fade-up">What You Get</div>
+            <h2 class="section-title fade-up">Transparency at every <em>step.</em></h2>
+            <div class="deliverables-grid">
+                <div class="deliverable-card fade-up">
+                    <h3>Weekly Intelligence Briefs</h3>
+                    <p>What happened, why it matters, what we're doing about it. Specific numbers, not vague summaries. Every recommendation backed by data.</p>
+                </div>
+                <div class="deliverable-card fade-up">
+                    <h3>Real-Time Anomaly Alerts</h3>
+                    <p>When something breaks, you know within hours. Not when you check the dashboard next week. We catch problems before they become expensive.</p>
+                </div>
+                <div class="deliverable-card fade-up">
+                    <h3>Quarterly Strategy Reviews</h3>
+                    <p>Deep dives into what's working, what's not, and where the opportunities are. Model performance, market shifts, and strategic recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="fade-up">Ready for <em>consistent</em> growth?</h2>
+        <p class="fade-up">We work with a limited number of clients to ensure depth over breadth. If you're serious about compounding growth, let's talk.</p>
+        <a href="/contact" class="btn fade-up">Start a conversation</a>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Signyl</div>
+            <div class="footer-links">
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+        
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        
+        function toggleMenu() {
+            document.querySelector('.hamburger').classList.toggle('active');
+            document.querySelector('.mobile-menu').classList.toggle('active');
+            document.body.style.overflow = document.querySelector('.mobile-menu').classList.contains('active') ? 'hidden' : '';
+        }
+    </script>
+</body>
+</html>
