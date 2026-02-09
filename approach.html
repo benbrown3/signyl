@@ -476,6 +476,45 @@
             line-height: 1.5;
         }
 
+        /* INTELLIGENCE LAYER */
+        .intelligence {
+            background: var(--bg);
+        }
+        .intel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            margin-top: 48px;
+        }
+        .intel-text p {
+            color: var(--ink-2);
+            font-size: 1.0625rem;
+            line-height: 1.85;
+            margin-bottom: 24px;
+        }
+        .intel-capabilities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .intel-cap {
+            padding: 24px;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+        .intel-cap h4 {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        .intel-cap p {
+            font-size: 0.875rem;
+            color: var(--ink-3);
+            line-height: 1.6;
+        }
+
         /* HUMAN + ML */
         .combination {
             background: var(--ink);
@@ -668,7 +707,8 @@
             .page-hero, section { padding-left: 24px; padding-right: 24px; }
             .philosophy-grid { grid-template-columns: 1fr; gap: 48px; }
             .problem-grid { grid-template-columns: 1fr; gap: 48px; }
-            .models-header { grid-template-columns: 1fr; gap: 32px; }
+            .intel-grid { grid-template-columns: 1fr; gap: 48px; }
+            .intel-capabilities { grid-template-columns: 1fr; }
             .process-steps { grid-template-columns: 1fr; }
             .process-step { border-right: none; border-bottom: 1px solid var(--border); }
             .process-step::after { display: none; }
@@ -824,6 +864,37 @@
                         <li>Expected impact with confidence intervals</li>
                         <li>Human review before action</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="intelligence">
+        <div class="container">
+            <div class="section-label fade-up">Intelligence Layer</div>
+            <h2 class="section-title fade-up">Models that learn your <em>business.</em></h2>
+            <div class="intel-grid fade-up">
+                <div class="intel-text">
+                    <p>We built proprietary ML models across paid media, SEO, and generative engine optimization. They run continuously across your data, surfacing insights that would take humans weeks to find manually.</p>
+                    <p>Every model is interpretable. When we recommend a change, you see the data behind it, the confidence level, and the expected impact. No black boxes.</p>
+                </div>
+                <div class="intel-capabilities">
+                    <div class="intel-cap">
+                        <h4>Forecasting</h4>
+                        <p>Predict performance trends before they materialize. Catch declines early.</p>
+                    </div>
+                    <div class="intel-cap">
+                        <h4>Anomaly Detection</h4>
+                        <p>Spot cost spikes, traffic drops, and performance shifts within hours.</p>
+                    </div>
+                    <div class="intel-cap">
+                        <h4>Optimization</h4>
+                        <p>Find the optimal budget allocation, bid strategy, and targeting mix.</p>
+                    </div>
+                    <div class="intel-cap">
+                        <h4>Attribution</h4>
+                        <p>Understand true channel impact across the full customer journey.</p>
+                    </div>
                 </div>
             </div>
         </div>
